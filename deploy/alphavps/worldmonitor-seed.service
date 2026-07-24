@@ -1,0 +1,10 @@
+[Unit]
+Description=Refresh World Monitor self-hosted data
+Requires=docker.service
+After=docker.service network-online.target
+
+[Service]
+Type=oneshot
+WorkingDirectory=/opt/worldmonitor
+ExecStart=/usr/bin/docker compose --profile tools run --rm seeder
+TimeoutStartSec=45min
