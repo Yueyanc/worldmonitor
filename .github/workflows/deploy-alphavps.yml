@@ -219,7 +219,7 @@ jobs:
             sleep 2
           done
 
-          docker compose --profile tools run --rm seeder node scripts/seed-earthquakes.mjs
+          docker compose --profile tools run --rm -T seeder node scripts/seed-earthquakes.mjs
 
           systemctl daemon-reload
           systemctl enable --now worldmonitor-seed.timer
