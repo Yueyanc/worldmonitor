@@ -60,6 +60,13 @@ jobs:
               exit 1
             fi
           fi
+          if [ -f /opt/worldmonitor/docker-compose.yml ]; then
+            cd /opt/worldmonitor
+            docker compose ps
+            systemctl is-active worldmonitor-seed.timer
+            systemctl is-active worldmonitor-seed.service || true
+            journalctl -u worldmonitor-seed.service --no-pager -n 20 || true
+          fi
           REMOTE
 
   build:
