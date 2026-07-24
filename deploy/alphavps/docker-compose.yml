@@ -4,7 +4,7 @@ services:
     container_name: worldmonitor-app
     restart: unless-stopped
     ports:
-      - "127.0.0.1:${WM_PORT:-3400}:8080"
+      - "127.0.0.1:${WM_PORT:-3480}:8080"
     environment:
       UPSTASH_REDIS_REST_URL: "http://redis-rest:80"
       UPSTASH_REDIS_REST_TOKEN: "${REDIS_TOKEN:?REDIS_TOKEN required}"

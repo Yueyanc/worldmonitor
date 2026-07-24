@@ -54,9 +54,9 @@ jobs:
           docker compose version
           test -d /opt/1panel/www/conf.d
           docker inspect 1Panel-openresty-Xdjb >/dev/null
-          if ss -ltnH | awk '{print $4}' | grep -Eq '(^|:)3400$'; then
+          if ss -ltnH | awk '{print $4}' | grep -Eq '(^|:)3480$'; then
             if ! docker ps --format '{{.Names}}' | grep -qx worldmonitor-app; then
-              echo "port 3400 is already occupied by another service" >&2
+              echo "port 3480 is already occupied by another service" >&2
               exit 1
             fi
           fi
@@ -178,7 +178,7 @@ jobs:
             umask 077
             {
               echo "IMAGE_TAG=$IMAGE_TAG"
-              echo "WM_PORT=3400"
+              echo "WM_PORT=3480"
               echo "REDIS_PASSWORD=$(openssl rand -hex 32)"
               echo "REDIS_TOKEN=$(openssl rand -hex 32)"
               echo "RELAY_SHARED_SECRET=$(openssl rand -hex 32)"
@@ -198,7 +198,7 @@ jobs:
           docker exec 1Panel-openresty-Xdjb nginx -s reload
 
           for attempt in $(seq 1 60); do
-            if curl -fsS http://127.0.0.1:3400/api/sidecar-health >/dev/null; then
+            if curl -fsS http://127.0.0.1:3480/api/sidecar-health >/dev/null; then
               break
             fi
             if [ "$attempt" = "60" ]; then
