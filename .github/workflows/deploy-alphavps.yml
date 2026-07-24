@@ -63,9 +63,11 @@ jobs:
           if [ -f /opt/worldmonitor/docker-compose.yml ]; then
             cd /opt/worldmonitor
             docker compose ps
-            systemctl is-active worldmonitor-seed.timer
+            systemctl is-active worldmonitor-seed.timer || true
             systemctl is-active worldmonitor-seed.service || true
+            systemctl status worldmonitor-seed.timer --no-pager -n 10 || true
             journalctl -u worldmonitor-seed.service --no-pager -n 20 || true
+            docker logs --tail 40 worldmonitor-ais-relay || true
           fi
           REMOTE
 
