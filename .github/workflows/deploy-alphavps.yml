@@ -80,7 +80,7 @@ jobs:
             image: worldmonitor-relay
             context: .
           - name: redis-rest
-            dockerfile: Dockerfile.redis-rest
+            dockerfile: docker/Dockerfile.redis-rest
             image: worldmonitor-redis-rest
             context: docker
           - name: seeder
